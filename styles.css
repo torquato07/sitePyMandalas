@@ -68,6 +68,7 @@ ul { list-style: none; }
 .site-header__actions { display: flex; align-items: center; gap: 1.5rem; }
 @media (min-width: 992px) { .site-header__nav { display: block; margin: 0 auto; padding: 0 2rem; } .site-header__nav ul { display: flex; align-items: center; gap: 2rem; } .site-header__nav a { font-weight: 500; } .mobile-nav-toggle { display: none; } }
 
+
 .theme-toggle { background: none; border: none; cursor: pointer; padding: 0; color: var(--color-primary); display: flex; }
 .theme-toggle .icon { width: 24px; height: 24px; transition: transform 0.3s ease; }
 .theme-toggle:hover .icon { transform: scale(1.1) rotate(15deg); }
@@ -376,4 +377,8 @@ body.dark-theme {
 /* --- 8. CORREÇÕES E OVERRIDES --- */
 .form-group[hidden] {
   display: none !important;
+}
+/* Esconde o botão de menu mobile em todas as telas */
+.mobile-nav-toggle {
+  display: none;
 }
