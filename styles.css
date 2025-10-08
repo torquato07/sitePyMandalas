@@ -10,7 +10,7 @@
   --font-heading: 'Lora', serif;
   --font-body: 'Poppins', sans-serif;
 
-  /* Cores (NOVA PALETA - Roxo/Lilás/Amarelo) */
+  /* Cores */
   --color-background: #F8F7FF;
   --color-background-accent: #EFEBF9;
   --color-text: #3E3C4A;
@@ -19,6 +19,7 @@
   --color-highlight: #FFDDA6;
   --color-white: #FFFFFF;
   --color-success: #6CC380;
+  --color-dark-purple: #5A4E7E;
   
   /* Componentes RGB para transparência */
   --rgb-background: 248, 247, 255;
@@ -91,8 +92,10 @@ ul { list-style: none; }
 .cart-drawer__close:hover { opacity: 1; }
 .cart-drawer__body { padding: 1.5rem; flex-grow: 1; overflow-y: auto; }
 .cart-empty-message { text-align: center; opacity: 0.7; }
-.cart-drawer__footer { padding: 1.5rem; border-top: 1px solid var(--color-accent); flex-shrink: 0; display: flex; flex-direction: column; gap: 1rem; }
-
+.cart-drawer__footer { padding: 1.5rem; flex-shrink: 0; }
+.cart-summary { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-accent); }
+.cart-summary p { display: flex; justify-content: space-between; font-size: 1rem; }
+.cart-summary p:last-child { font-size: 1.1rem; font-weight: bold; }
 .cart-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--color-accent); }
 .cart-item:first-child { padding-top: 0; }
 .cart-item__info { flex-grow: 1; }
@@ -106,6 +109,13 @@ ul { list-style: none; }
 .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
 .form-group--checkbox { flex-direction: row; align-items: center; gap: 0.75rem; font-weight: 500; }
 input[type="checkbox"] { width: 1.25em; height: 1.25em; cursor: pointer; accent-color: var(--color-primary); }
+
+.form { max-width: 650px; margin: 3rem auto 0 auto; }
+.form-group label { font-weight: 500; opacity: 0.9; margin-bottom: 0.25rem; }
+input[type="text"], textarea { background-color: var(--color-white); border: 2px solid #DCD9EA; }
+input[type="text"]:focus, textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 4px rgba(142, 124, 203, 0.2); outline: none; }
+.form__submit { width: 100%; padding-top: 1rem; padding-bottom: 1rem; font-size: 1.1rem; margin-top: 1rem; }
+@media (min-width: 768px) { .form__submit { width: auto; } }
 
 /* --- Layout do Configurador de Produto (Layout Vertical) --- */
 .product-configurator {
@@ -130,7 +140,6 @@ input[type="checkbox"] { width: 1.25em; height: 1.25em; cursor: pointer; accent-
   align-items: center;
   gap: 1rem;
   overflow: hidden;
-  /* Altura fixa removida para evitar corte da legenda */
 }
 
 .product-configurator__image img {
@@ -146,11 +155,10 @@ input[type="checkbox"] { width: 1.25em; height: 1.25em; cursor: pointer; accent-
   object-fit: contain;
 }
 
-/* Controla o tamanho das imagens em telas grandes */
 @media (min-width: 768px) {
   .product-configurator__image img,
   .configurador-visualizador-tamanho img {
-    max-height: 400px; /* Define uma altura máxima para as imagens no desktop */
+    max-height: 400px;
   }
 }
 
@@ -244,50 +252,6 @@ input[type="checkbox"] { width: 1.25em; height: 1.25em; cursor: pointer; accent-
 .visual-options-group--sizes .visual-option__card img {
   height: 80px;
 }
-/* No seu styles.css */
-
-/* --- Estilos para o Formulário de Contato --- */
-.form {
-  max-width: 650px; /* Limita a largura do formulário em telas grandes */
-  margin: 3rem auto 0 auto; /* Centraliza e adiciona espaço no topo */
-}
-
-.form-group label {
-  font-weight: 500; /* Deixa o texto do label com um pouco mais de destaque */
-  opacity: 0.9;
-  margin-bottom: 0.25rem;
-}
-
-/* Deixa os campos com fundo branco para se destacarem */
-input[type="text"],
-textarea {
-  background-color: var(--color-white);
-  border: 2px solid #DCD9EA; /* Uma borda um pouco mais visível */
-}
-
-/* Remove o brilho azul padrão e usa as cores do site ao clicar */
-input[type="text"]:focus,
-textarea:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(142, 124, 203, 0.2);
-  outline: none;
-}
-
-/* Faz o botão ocupar toda a largura no celular, facilitando o clique */
-.form__submit {
-  width: 100%;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  font-size: 1.1rem;
-  margin-top: 1rem;
-}
-
-/* Em telas maiores, o botão volta ao tamanho normal */
-@media (min-width: 768px) {
-  .form__submit {
-    width: auto;
-  }
-}
 
 /* --- 5. SEÇÕES ESPECÍFICAS --- */
 .hero { padding-top: var(--header-height); min-height: calc(60vh + var(--header-height)); display: flex; align-items: center; justify-content: center; text-align: center; position: relative; background-color: var(--color-background); overflow: hidden; }
@@ -303,11 +267,11 @@ textarea:focus {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.4;
+  opacity: 0.25;
   z-index: 1;
 }
 .hero__inner { position: relative; z-index: 2; max-width: 800px; padding: 2rem; }
-.hero h1, .hero p { color: var(--color-primary); }
+.hero h1, .hero p { color: var(--color-dark-purple); }
 #gallery, #shop, #custom-order { background-color: var(--color-background-accent); }
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
 .gallery-grid__item { background-color: var(--color-background); border-radius: var(--border-radius); box-shadow: var(--shadow); overflow: hidden; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -328,11 +292,12 @@ body.dark-theme {
   --color-accent: #5C5977;
   --color-highlight: #F5E8C7;
   --rgb-background: 40, 39, 54;
+  --color-dark-purple: #D0C6EC;
 }
 .dark-theme .site-header { background-color: rgba(var(--rgb-background), 0.8); }
 .dark-theme .theme-toggle .icon-sun { display: block; fill: var(--color-highlight); }
 .dark-theme .theme-toggle .icon-moon { display: none; }
-.dark-theme select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24' 24' fill='%23F0F0F8'%3E%3Cpath d='M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z'%3E%3C/path%3E%3C/svg%3E"); }
+.dark-theme select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F0F0F8'%3E%3Cpath d='M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z'%3E%3C/path%3E%3C/svg%3E"); }
 .dark-theme .remove-item-btn:hover { background-color: var(--color-accent); }
 .dark-theme .site-footer { background-color: #1A1926; border-top: 1px solid var(--color-accent); }
 .dark-theme .btn--primary { background-color: var(--color-highlight); color: #3E3C4A; }
@@ -343,4 +308,8 @@ body.dark-theme {
 /* --- 8. CORREÇÕES E OVERRIDES --- */
 .form-group[hidden] {
   display: none !important;
+}
+/* Esconde o botão de menu mobile em todas as telas */
+.mobile-nav-toggle {
+  display: none;
 }
