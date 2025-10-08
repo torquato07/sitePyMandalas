@@ -14,9 +14,6 @@
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="theme-color" content="#8E7CCB" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script type="application/ld+json">
   {
@@ -36,7 +33,7 @@
 
   <header class="site-header" role="banner">
     <div class="container site-header__inner">
-      <a href="/" class="site-header__brand" aria-label="PyMandalas - Página Inicial">
+      <a href="#" class="site-header__brand" aria-label="PyMandalas - Página Inicial">
         <span>PyMandalas</span>
       </a>
       <nav class="site-header__nav" role="navigation" aria-label="Navegação principal">
@@ -70,66 +67,134 @@
     
     <section id="about" class="section"><div class="container"><h2 class="section__title">A Artista por Trás dos Pontos</h2><div class="about-content"><div class="about-content__image"><img src="images/fotoMae.png" alt="Foto sorridente de Cynthia (Py), a artista das mandalas." loading="lazy" /></div><div class="about-content__text"><h3>Olá, eu sou a Cynthia (Py)!</h3><p>Nascida em Belo Horizonte e curitibana de coração, encontrei nas mandalas uma forma de meditação e expressão. Cada ponto é uma intenção, cada cor é uma emoção, e cada peça finalizada é um portal de boas energias que eu tenho o prazer de compartilhar com você.</p><p>Meu trabalho é totalmente artesanal, e dedico meu tempo e minha energia para que cada mandala seja única e especial, assim como a pessoa que a receberá.</p></div></div></div></section>
     
-<section id="shop" class="section">
-  <div class="container">
-    <h2 class="section__title">Monte sua Mandala</h2>
-    <p class="section__subtitle">Personalize cada detalhe para criar uma peça que vibre na sua sintonia. Siga os passos abaixo para montar e ver o preço em tempo real.</p>
-    
-    <div class="product-configurator">
-      
-      <div class="product-configurator__visualizers">
-        <div class="product-configurator__image" id="visualizador-tecnica" hidden>
-          <img src="" alt="Exemplo de mandala na técnica selecionada" id="mandala-image-tecnica" />
-          <p class="product-configurator__image-caption" id="legenda-tecnica">
-            Exemplo de mandala na técnica selecionada
-          </p>
-        </div>
-        <div class="configurador-visualizador-tamanho" hidden>
-          <img src="" id="mandala-image-tamanho" alt="Comparação de tamanho da mandala">
-          <p class="visualizador-legenda" id="legenda-tamanho">Para referência, o prato ao lado tem 26 cm de diâmetro.</p>
-        </div>
-      </div>
-
-      <div class="product-configurator__options">
+    <section id="shop" class="section">
+      <div class="container">
+        <h2 class="section__title">Monte sua Mandala</h2>
+        <p class="section__subtitle">Personalize cada detalhe para criar uma peça que vibre na sua sintonia. Siga os passos abaixo para montar e ver o preço em tempo real.</p>
         
-        <div class="options-group options-group--top">
+        <div class="product-configurator">
+      
           <article class="product-card__content">
             <h3>Mandala Personalizada</h3>
             <p>Feita com tinta acrílica em base de MDF e finalizada com verniz protetor para maior durabilidade das cores.</p>
-            <div class="form-group">
-              <label for="mandala-technique" id="label-tecnica">1. Escolha a Técnica:</label>
-              <select id="mandala-technique" name="mandala-technique">
-                <option value="" disabled selected>-- Escolha uma técnica --</option>
-                <option value="Pontilhismo" data-image="images/tecnica-pontilhismo.png" data-image-aplique="images/tecnica-pontilhismo-aplique.png">Pontilhismo</option>
-                <option value="Zentangle" data-image="images/tecnica-zentangle.png">Zentangle</option>
-                <option value="Floral Geométrico" data-image="images/tecnica-floral.png">Floral Geométrico</option>
-              </select>
-            </div>
-            <div class="form-group" id="aplique-option-wrapper" hidden>
-              <label for="mandala-aplique" id="label-adicional">2. Adicional:</label>
-              <div class="form-group--checkbox">
-                <input type="checkbox" id="mandala-aplique" name="mandala-aplique" data-addon-price="20.00">
-                <label for="mandala-aplique">Adicionar Aplique Central (+ R$ 20,00)</label>
-              </div>
-            </div>
           </article>
-        </div>
-
-        <div class="options-group options-group--bottom">
+    
           <div class="form-group">
-            <label for="mandala-size" id="label-diametro">2. Escolha o Diâmetro:</label>
-            <select id="mandala-size" name="mandala-size">
-              <option value="" disabled selected>-- Escolha um diâmetro --</option>
-              <option value="35" data-price="200.00" data-image="images/tamanho-35cm.png">35 cm - R$ 200,00</option>
-              <option value="40" data-price="250.00" data-image="images/tamanho-40cm.png">40 cm - R$ 250,00</option>
-              <option value="50" data-price="300.00" data-image="images/tamanho-50cm.png">50 cm - R$ 300,00</option>
-              <option value="60" data-price="400.00" data-image="images/tamanho-60cm.png">60 cm - R$ 400,00</option>
-              <option value="80" data-price="600.00" data-image="images/tamanho-80cm.png">80 cm - R$ 600,00</option>
-              <option value="90" data-price="790.00" data-image="images/tamanho-90cm.png">90 cm - R$ 790,00</option>
-              <option value="100" data-price="850.00" data-image="images/tamanho-100cm.png">1 metro - R$ 850,00</option>
-              <option value="outro" data-price="0">Outro diâmetro (solicitar orçamento)</option>
-            </select>
+            <label id="label-tecnica">1. Escolha a Técnica:</label>
+            <div class="visual-options-group" id="technique-options">
+              <label class="visual-option">
+                <input type="radio" name="mandala-technique" value="Pontilhismo" data-image="images/tecnica-pontilhismo.png" data-image-aplique="images/tecnica-pontilhismo-aplique.png">
+                <div class="visual-option__card">
+                  <img src="images/tecnica-pontilhismo.png" alt="Técnica Pontilhismo">
+                  <span>Pontilhismo</span>
+                </div>
+              </label>
+              <label class="visual-option">
+                <input type="radio" name="mandala-technique" value="Zentangle" data-image="images/tecnica-zentangle.png">
+                <div class="visual-option__card">
+                  <img src="images/tecnica-zentangle.png" alt="Técnica Zentangle">
+                  <span>Zentangle</span>
+                </div>
+              </label>
+              <label class="visual-option">
+                <input type="radio" name="mandala-technique" value="Floral Geométrico" data-image="images/tecnica-floral.png">
+                <div class="visual-option__card">
+                  <img src="images/tecnica-floral.png" alt="Técnica Floral Geométrico">
+                  <span>Floral Geométrico</span>
+                </div>
+              </label>
+            </div>
           </div>
+    
+          <div class="product-configurator__image" id="visualizador-tecnica" hidden>
+            <img src="" alt="Exemplo de mandala na técnica selecionada" id="mandala-image-tecnica" />
+            <p class="product-configurator__image-caption" id="legenda-tecnica">
+              Exemplo de mandala na técnica selecionada
+            </p>
+          </div>
+          
+          <div class="form-group" id="aplique-option-wrapper" hidden>
+            <label for="mandala-aplique" id="label-adicional">2. Adicional:</label>
+            <div class="form-group--checkbox">
+              <input type="checkbox" id="mandala-aplique" name="mandala-aplique" data-addon-price="20.00">
+              <label for="mandala-aplique">Adicionar Aplique Central (+ R$ 20,00)</label>
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label id="label-diametro">2. Escolha o Diâmetro:</label>
+            <div class="visual-options-group visual-options-group--sizes">
+              <label class="visual-option">
+                <input type="radio" name="mandala-size" value="35" data-price="200.00" data-image="images/tamanho-35cm.png">
+                <div class="visual-option__card">
+                  <img src="images/tamanho-35cm.png" alt="Tamanho 35 cm">
+                  <span class="visual-option__title">35 cm</span>
+                  <span class="visual-option__price">R$ 200,00</span>
+                </div>
+              </label>
+              <label class="visual-option">
+                <input type="radio" name="mandala-size" value="40" data-price="250.00" data-image="images/tamanho-40cm.png">
+                <div class="visual-option__card">
+                  <img src="images/tamanho-40cm.png" alt="Tamanho 40 cm">
+                  <span class="visual-option__title">40 cm</span>
+                  <span class="visual-option__price">R$ 250,00</span>
+                </div>
+              </label>
+              <label class="visual-option">
+                <input type="radio" name="mandala-size" value="50" data-price="300.00" data-image="images/tamanho-50cm.png">
+                <div class="visual-option__card">
+                  <img src="images/tamanho-50cm.png" alt="Tamanho 50 cm">
+                  <span class="visual-option__title">50 cm</span>
+                  <span class="visual-option__price">R$ 300,00</span>
+                </div>
+              </label>
+              <label class="visual-option">
+                <input type="radio" name="mandala-size" value="60" data-price="400.00" data-image="images/tamanho-60cm.png">
+                <div class="visual-option__card">
+                  <img src="images/tamanho-60cm.png" alt="Tamanho 60 cm">
+                  <span class="visual-option__title">60 cm</span>
+                  <span class="visual-option__price">R$ 400,00</span>
+                </div>
+              </label>
+              <label class="visual-option">
+                <input type="radio" name="mandala-size" value="80" data-price="600.00" data-image="images/tamanho-80cm.png">
+                <div class="visual-option__card">
+                  <img src="images/tamanho-80cm.png" alt="Tamanho 80 cm">
+                  <span class="visual-option__title">80 cm</span>
+                  <span class="visual-option__price">R$ 600,00</span>
+                </div>
+              </label>
+              <label class="visual-option">
+                <input type="radio" name="mandala-size" value="90" data-price="790.00" data-image="images/tamanho-90cm.png">
+                <div class="visual-option__card">
+                  <img src="images/tamanho-90cm.png" alt="Tamanho 90 cm">
+                  <span class="visual-option__title">90 cm</span>
+                  <span class="visual-option__price">R$ 790,00</span>
+                </div>
+              </label>
+              <label class="visual-option">
+                <input type="radio" name="mandala-size" value="100" data-price="850.00" data-image="images/tamanho-100cm.png">
+                <div class="visual-option__card">
+                  <img src="images/tamanho-100cm.png" alt="Tamanho 1 metro">
+                  <span class="visual-option__title">1 metro</span>
+                  <span class="visual-option__price">R$ 850,00</span>
+                </div>
+              </label>
+              <label class="visual-option">
+                <input type="radio" name="mandala-size" value="outro" data-price="0">
+                <div class="visual-option__card">
+                  <span class="visual-option__title">Outro tamanho</span>
+                  <span class="visual-option__price">Sob consulta</span>
+                </div>
+              </label>
+            </div>
+          </div>
+    
+          <div class="configurador-visualizador-tamanho" hidden>
+            <img src="" id="mandala-image-tamanho" alt="Comparação de tamanho da mandala">
+            <p class="visualizador-legenda" id="legenda-tamanho">Para referência, o prato ao lado tem 26 cm de diâmetro.</p>
+          </div>
+    
           <div class="price-and-actions">
             <div id="price-container">
               <p class="product-card__price" id="product-price">---</p>
@@ -140,14 +205,12 @@
             </div>
             <button class="btn btn--primary add-to-cart" id="add-to-cart-btn" disabled>Adicionar ao Carrinho</button>
           </div>
+          
         </div>
       </div>
-
-    </div>
-  </div>
-</section>
+    </section>
     
-    <section id="custom-order" class="section"><div class="container"><h2 class="section__title">Tem uma Ideia Única?</h2><p class="section__subtitle">Se você deseja uma mandala com um design, cores ou tamanho que não encontrou nas opções, vamos conversar! Crio projetos totalmente personalizados para transformar sua visão em arte.</p>
+    <section id="custom-order" class="section"><div class="container"><h2 class="section__title">Tem uma Ideia Única?</h2><p class="section__subtitle">Se você deseja uma mandala com um design, cores, tamanho ou feitas em algum objeto diferente (ex: chaveiros, canecas...) e não encontrou nas opções, vamos conversar! Crio projetos totalmente personalizados para transformar sua visão em arte.</p>
       <form id="custom-order-form" class="form" aria-label="Formulário de pedido personalizado">
         <div class="form-group">
           <label for="order-name">Seu nome</label>
@@ -155,7 +218,7 @@
         </div>
         <div class="form-group">
           <label for="order-message">Descreva sua ideia</label>
-          <textarea id="order-message" name="message" rows="5" required placeholder="Ex: Gostaria de uma mandala feita em um chaveiro, nas cores verde, azul e branco..."></textarea>
+          <textarea id="order-message" name="message" rows="5" required placeholder="Ex: Gostaria de uma mandala de 80cm com tons de azul marinho, dourado e branco..."></textarea>
         </div>
         <button type="submit" class="btn btn--primary form__submit" id="custom-order-btn">
           Enviar Ideia no WhatsApp

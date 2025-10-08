@@ -1,23 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- CONFIGURAÇÕES GLOBAIS ---
     const WHATSAPP_NUMBER = '5541992717798';
     const IMAGE_TRANSITION_DELAY = 200;
-
-    // --- ESTADO DA APLICAÇÃO ---
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // --- SELETORES DO DOM ---
     const DOM = {
         body: document.body,
         siteHeader: document.querySelector('.site-header'),
         themeToggleBtn: document.getElementById('theme-toggle-btn'),
         currentYearSpan: document.getElementById('current-year'),
         product: {
-            techniqueSelect: document.getElementById('mandala-technique'),
+            techniqueRadios: document.querySelectorAll('input[name="mandala-technique"]'),
+            sizeRadios: document.querySelectorAll('input[name="mandala-size"]'),
             apliqueCheckbox: document.getElementById('mandala-aplique'),
             apliqueWrapper: document.getElementById('aplique-option-wrapper'),
-            sizeSelect: document.getElementById('mandala-size'),
             priceDisplay: document.getElementById('product-price'),
             addToCartBtn: document.getElementById('add-to-cart-btn'),
             customSizeInfo: document.getElementById('custom-size-info'),
@@ -26,9 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             labelDiametro: document.getElementById('label-diametro'),
             techniqueImageContainer: document.getElementById('visualizador-tecnica'),
             techniqueImage: document.getElementById('mandala-image-tecnica'),
-            techniqueCaption: document.getElementById('legenda-tecnica'),
             sizeImage: document.getElementById('mandala-image-tamanho'),
-            sizeCaption: document.getElementById('legenda-tamanho'),
             sizeVisualizer: document.querySelector('.configurador-visualizador-tamanho'),
         },
         cart: {
@@ -48,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- MÓDULO DE INICIALIZAÇÃO ---
     function init() {
         setupThemeToggle();
         setupHeaderScroll();
@@ -60,40 +53,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- LÓGICA DO PRODUTO ---
     function setupProductConfigurator() {
-        if (!DOM.product.techniqueSelect) return;
+        if (DOM.product.techniqueRadios.length === 0) return;
 
         const updateProductView = () => {
-            const techOption = DOM.product.techniqueSelect.options[DOM.product.techniqueSelect.selectedIndex];
-            const sizeOption = DOM.product.sizeSelect.options[DOM.product.sizeSelect.selectedIndex];
+            const selectedTechniqueRadio = document.querySelector('input[name="mandala-technique"]:checked');
+            const selectedSizeRadio = document.querySelector('input[name="mandala-size"]:checked');
             
-            if (techOption.value === 'Pontilhismo') {
+            if (selectedTechniqueRadio && selectedTechniqueRadio.value === 'Pontilhismo') {
                 DOM.product.apliqueWrapper.removeAttribute('hidden');
-                if(DOM.product.labelTechnique) DOM.product.labelTechnique.textContent = '1. Escolha a Técnica:';
-                if(DOM.product.labelAdicional) DOM.product.labelAdicional.textContent = '2. Adicional:';
-                if(DOM.product.labelDiametro) DOM.product.labelDiametro.textContent = '3. Escolha o Diâmetro:';
+                DOM.product.labelTechnique.textContent = '1. Escolha a Técnica:';
+                DOM.product.labelAdicional.textContent = '2. Adicional:';
+                DOM.product.labelDiametro.textContent = '3. Escolha o Diâmetro:';
             } else {
                 DOM.product.apliqueWrapper.setAttribute('hidden', 'true');
-                DOM.product.apliqueCheckbox.checked = false; 
+                if(DOM.product.apliqueCheckbox) DOM.product.apliqueCheckbox.checked = false; 
                 if(DOM.product.labelTechnique) DOM.product.labelTechnique.textContent = '1. Escolha a Técnica:';
                 if(DOM.product.labelDiametro) DOM.product.labelDiametro.textContent = '2. Escolha o Diâmetro:';
             }
 
-            const hasAplique = DOM.product.apliqueCheckbox.checked;
+            const hasAplique = DOM.product.apliqueCheckbox && DOM.product.apliqueCheckbox.checked;
             
-            const techImageSrc = hasAplique ? techOption.dataset.imageAplique : techOption.dataset.image;
+            const techImageSrc = selectedTechniqueRadio ? (hasAplique ? selectedTechniqueRadio.dataset.imageAplique : selectedTechniqueRadio.dataset.image) : null;
             if (techImageSrc) {
-                DOM.product.techniqueImageContainer.removeAttribute('hidden');
+                if(DOM.product.techniqueImageContainer) DOM.product.techniqueImageContainer.removeAttribute('hidden');
                 if (DOM.product.techniqueImage && DOM.product.techniqueImage.src !== techImageSrc) {
                     DOM.product.techniqueImage.src = techImageSrc;
                 }
             } else {
-                DOM.product.techniqueImageContainer.setAttribute('hidden', 'true');
+                if(DOM.product.techniqueImageContainer) DOM.product.techniqueImageContainer.setAttribute('hidden', 'true');
             }
             
-            const sizeImageSrc = sizeOption.dataset.image;
-            if (sizeImageSrc && sizeOption.value !== 'outro') {
+            const sizeImageSrc = selectedSizeRadio ? selectedSizeRadio.dataset.image : null;
+            if (sizeImageSrc && selectedSizeRadio && selectedSizeRadio.value !== 'outro') {
                 if(DOM.product.sizeVisualizer) DOM.product.sizeVisualizer.removeAttribute('hidden');
                 if (DOM.product.sizeImage && DOM.product.sizeImage.src !== sizeImageSrc) {
                     DOM.product.sizeImage.src = sizeImageSrc;
@@ -102,14 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(DOM.product.sizeVisualizer) DOM.product.sizeVisualizer.setAttribute('hidden', 'true');
             }
             
-            const basePrice = parseFloat(sizeOption.dataset.price || '0');
-            const apliquePrice = parseFloat(DOM.product.apliqueCheckbox.dataset.addonPrice || '0');
+            const basePrice = selectedSizeRadio ? parseFloat(selectedSizeRadio.dataset.price || '0') : 0;
+            const apliquePrice = (DOM.product.apliqueCheckbox && parseFloat(DOM.product.apliqueCheckbox.dataset.addonPrice)) || 0;
             let currentPrice = basePrice + (hasAplique ? apliquePrice : 0);
             
-            const isPlaceholderSize = sizeOption.value === '';
-            const isCustomSize = sizeOption.value === 'outro';
+            const isCustomSize = selectedSizeRadio && selectedSizeRadio.value === 'outro';
+            const isSizeSelected = !!selectedSizeRadio;
 
-            if (isPlaceholderSize) {
+            if (!isSizeSelected) {
                 if(DOM.product.priceDisplay) DOM.product.priceDisplay.textContent = '---';
                 if(DOM.product.addToCartBtn) DOM.product.addToCartBtn.setAttribute('disabled', 'true');
                 if(DOM.product.customSizeInfo) DOM.product.customSizeInfo.setAttribute('hidden', '');
@@ -124,16 +116,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        DOM.product.techniqueSelect.addEventListener('change', updateProductView);
-        DOM.product.apliqueCheckbox.addEventListener('change', updateProductView);
-        DOM.product.sizeSelect.addEventListener('change', updateProductView);
+        DOM.product.techniqueRadios.forEach(radio => {
+            radio.addEventListener('change', updateProductView);
+        });
+        DOM.product.sizeRadios.forEach(radio => {
+            radio.addEventListener('change', updateProductView);
+        });
+        
+        if(DOM.product.apliqueCheckbox) DOM.product.apliqueCheckbox.addEventListener('change', updateProductView);
 
         if (DOM.product.addToCartBtn) {
             DOM.product.addToCartBtn.addEventListener('click', () => {
-                 const sizeOption = DOM.product.sizeSelect.options[DOM.product.sizeSelect.selectedIndex];
-                 if (sizeOption.value === 'outro' || sizeOption.value === '') return;
+                 const selectedTechniqueRadio = document.querySelector('input[name="mandala-technique"]:checked');
+                 const selectedSizeRadio = document.querySelector('input[name="mandala-size"]:checked');
+                 if (!selectedTechniqueRadio || !selectedSizeRadio || selectedSizeRadio.value === 'outro') return;
                  const price = parseFloat(DOM.product.priceDisplay.textContent.replace(/[^0-9,-]+/g,"").replace(",", "."));
-                 cart.push({ id: Date.now(), name: `Mandala Personalizada`, size: sizeOption.text.split('-')[0].trim(), technique: DOM.product.techniqueSelect.value, aplique: DOM.product.apliqueCheckbox.checked, price: price });
+                 cart.push({ id: Date.now(), name: `Mandala Personalizada`, size: `${selectedSizeRadio.value} cm`, technique: selectedTechniqueRadio.value, aplique: DOM.product.apliqueCheckbox.checked, price: price });
                  updateCartDisplay();
                  openCart();
             });
@@ -141,9 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
         updateProductView();
     }
     
-    // --- FUNÇÕES GERAIS E DO CARRINHO ---
     const formatCurrency = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
+    
     function updateCartDisplay() {
         const totalItems = cart.length;
         const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
@@ -256,6 +253,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Inicia a aplicação
     init();
 });
